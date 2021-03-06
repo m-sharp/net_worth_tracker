@@ -1,0 +1,1 @@
+Learning Django by creating a simple Asset / Liability Manager.
