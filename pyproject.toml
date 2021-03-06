@@ -7,6 +7,8 @@ authors = ["Mike Harp <msharp185@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 Django = "^3.1.7"
+PyMySQL = "^1.0.2"
+cryptography = "^3.4.6"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
