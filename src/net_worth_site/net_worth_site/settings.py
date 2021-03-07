@@ -27,7 +27,7 @@ SECRET_KEY = "&a7+21#3xh(36a&8cz84a6b20u!i5e*##zvx%x93v*6mrs6hvi"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["172.21.91.194"]
 
 
 # Application definition
@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 # ToDo: May not need any of these
 INSTALLED_APPS = [
     "tracker.apps.TrackerConfig",
+    "rest_framework",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -128,3 +129,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
+
+REST_FRAMEWORK = {"DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"]}

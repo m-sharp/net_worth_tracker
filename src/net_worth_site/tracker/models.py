@@ -1,8 +1,8 @@
-from django.db import models
+from django.db.models import PROTECT, CharField, FloatField, ForeignKey, Model
 
 
-class RecordType(models.Model):
-    name = models.CharField(max_length=25)
+class RecordType(Model):
+    name = CharField(max_length=25)
 
     def __str__(self):
         return self.name
@@ -21,10 +21,10 @@ def get_all_record_types():
     return RecordType.objects.all().values("id", "name")
 
 
-class Record(models.Model):
-    record_type = models.ForeignKey(RecordType, on_delete=models.PROTECT)
-    name = models.CharField(max_length=100)
-    balance = models.FloatField(default=0)
+class Record(Model):
+    record_type = ForeignKey(RecordType, on_delete=PROTECT)
+    name = CharField(max_length=100)
+    balance = FloatField(default=0)
 
     def __str__(self):
         return self.name
@@ -35,10 +35,6 @@ class Record(models.Model):
         yield "balance", self.balance
         if self.id:
             yield "id", self.id
-
-
-def get_all_records():
-    return Record.objects.all().values("id", "record_type_id", "name", "balance")
 
 
 def get_total_balance(records):

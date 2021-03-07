@@ -1,11 +1,10 @@
-from django.urls import path
+from django.urls import include, path
+from rest_framework.routers import DefaultRouter
 
-from .views import create, get_all, get_record_types, index, records
+from .views import RecordTypeViewSet, RecordViewSet, index
 
-urlpatterns = [
-    path("", index, name="index"),
-    path("record-types", get_record_types, name="get all record types"),
-    path("records/get-all", get_all, name="get all records"),
-    path("records/create", create, name="POST new record"),
-    path("records/<int:record_id>/", records, name="GET/DELETE records"),
-]
+router = DefaultRouter()
+router.register(r"record", RecordViewSet)
+router.register(r"record_type", RecordTypeViewSet)
+
+urlpatterns = [path("", index, name="index"), path("api/", include(router.urls))]
