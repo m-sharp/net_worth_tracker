@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
@@ -65,4 +65,4 @@ def index(request):
     """
     Enables the GET /tracker/ endpoint when registered in mod:`~net_worth.site.tracker.urls`.
     """
-    return HttpResponse("Bout time for some React here")
+    return render(request, "tracker/index.html", context={})

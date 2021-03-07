@@ -1,0 +1,16 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "Frontend for a Simple Net Worth Tracker",
+  "main": "index.js",
+  "scripts": {
+    "dev-watch": "webpack --watch --config webpack.config.js"
+  },
+  "keywords": [],
+  "author": "Mike Harp",
+  "license": "ISC",
+  "dependencies": {
+    "webpack": "^5.24.3",
+    "webpack-cli": "^4.5.0"
+  }
+}
