@@ -1,7 +1,6 @@
 from django.db import models
 
 
-# ToDo: Need to seed records for 'Asset' and 'Liability'
 class RecordType(models.Model):
     name = models.CharField(max_length=25)
 
@@ -9,7 +8,7 @@ class RecordType(models.Model):
         return self.name
 
 
-class Records(models.Model):
+class Record(models.Model):
     record_type = models.ForeignKey(RecordType, on_delete=models.PROTECT)
     name = models.CharField(max_length=100)
     balance = models.FloatField(default=0)

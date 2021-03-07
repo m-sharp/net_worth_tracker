@@ -1,0 +1,21 @@
+{% if assets %}
+<h3>Assets</h3>
+<ul>
+    {% for asset in assets %}
+    <li><strong>{{ asset.name }}</strong> - <em>{{ asset.balance }}</em></li>
+    {% endfor %}
+</ul>
+<span><strong>Total Assets:</strong> {{ asset_total }}</span>
+{% endif %}
+{% if liabilities %}
+<h3>Liabilities</h3>
+<ul>
+    {% for liability in liabilities %}
+    <li><strong>{{ liability.name }}</strong> - <em>{{ liability.balance }}</em></li>
+    {% endfor %}
+</ul>
+<span><strong>Total Liabilities:</strong> {{ liability_total }}</span>
+{% endif %}
+<p>
+    <span><strong>Net Worth:</strong> {{ net_worth }}</span>
+</p>
