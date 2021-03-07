@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 
 # ToDo: May not need any of these
 INSTALLED_APPS = [
+    "tracker.apps.TrackerConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

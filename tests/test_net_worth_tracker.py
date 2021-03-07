@@ -1,4 +1,4 @@
-from src.net_worth_tracker import __version__
+from net_worth_site.tracker import __version__
 
 
 def test_version():
