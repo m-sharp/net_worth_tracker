@@ -4,13 +4,22 @@
   "description": "Frontend for a Simple Net Worth Tracker",
   "main": "index.js",
   "scripts": {
-    "dev-watch": "webpack --watch --config webpack.config.js"
+    "dev": "webpack --mode development --config webpack.config.js",
+    "dev-watch": "webpack --mode development --watch --config webpack.config.js",
+    "build": "webpack --mode production --config webpack.config.js"
   },
   "keywords": [],
   "author": "Mike Harp",
   "license": "ISC",
   "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "webpack": "^5.24.3",
     "webpack-cli": "^4.5.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.8",
+    "@babel/preset-react": "^7.12.13",
+    "babel-loader": "^8.2.2"
   }
 }

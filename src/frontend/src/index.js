@@ -1,1 +1,1 @@
-alert('Hello there');
+import App from "./components/App";
