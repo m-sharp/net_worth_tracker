@@ -17,10 +17,6 @@ asset_record_type = RecordType.objects.filter(name="Asset").first()
 liability_record_type = RecordType.objects.filter(name="Liability").first()
 
 
-def get_all_record_types():
-    return RecordType.objects.all().values("id", "name")
-
-
 class Record(Model):
     record_type = ForeignKey(RecordType, on_delete=PROTECT)
     name = CharField(max_length=100)
