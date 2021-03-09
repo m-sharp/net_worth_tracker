@@ -11,7 +11,10 @@ class BalanceSheet extends Component {
                 <ul>
                     { this.props.records.map(record => {
                         return (
-                            <Record record={ record } key={ record.id } />
+                            <Record record={ record }
+                                    key={ record.id }
+                                    id={ record.id }
+                                    delete_handler={ this.props.delete_handler } />
                         );
                     })}
                 </ul>

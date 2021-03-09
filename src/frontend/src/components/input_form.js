@@ -5,7 +5,6 @@ import { post_record } from "../services/record_service";
 const default_id = 0
 
 class InputForm extends Component {
-
     constructor(props) {
         super(props);
         this.default_type_id = default_id;

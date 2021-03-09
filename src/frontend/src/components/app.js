@@ -18,13 +18,15 @@ class App extends Component {
             loaded_record_types: false,
             status: "Loading...",
         };
+        this.reload_records = this.reload_records.bind(this);
         this.add_record = this.add_record.bind(this);
+        this.delete_record = this.delete_record.bind(this);
     };
 
     componentDidMount() {
         get_record_types().then(data => {
-            let asset = data.filter(function(record_type) { return record_type.name === "Asset" });
-            let liability = data.filter(function(record_type) { return record_type.name === "Liability" });
+            let asset = data.filter((record_type) => { return record_type.name === "Asset" });
+            let liability = data.filter((record_type) => { return record_type.name === "Liability" });
             this.setState(() => {
                 return {
                     record_types: {
@@ -46,10 +48,7 @@ class App extends Component {
         });
     };
 
-
-    add_record(record) {
-        let records_ = this.state.records;
-        records_.push(record);
+    reload_records(records_) {
         this.setState(() => {
             return {
                 records: records_
@@ -64,6 +63,18 @@ class App extends Component {
         });
     };
 
+    add_record(record) {
+        let records_ = this.state.records;
+        records_.push(record);
+        this.reload_records(records_);
+    };
+
+    delete_record(record_id) {
+        let records_ = this.state.records;
+        records_ = records_.filter((record) => { return record.id != record_id; });
+        this.reload_records(records_);
+    };
+
     render() {
         if (!this.state.loaded_record_types || !this.state.loaded_records) {
             return <div />
@@ -71,11 +82,12 @@ class App extends Component {
         return (
             <div>
                 <div>
-                    <BalanceSheet records={ this.state.records } />
+                    <BalanceSheet records={ this.state.records }
+                                  delete_handler={ this.delete_record } />
                     <InputForm record_types={ this.state.record_types }
                                create_handler={ this.add_record } />
-                    <Stats asset_total={ this.state.meta.asset_total}
-                           liability_total={ this.state.meta.liability_total}
+                    <Stats asset_total={ this.state.meta.asset_total }
+                           liability_total={ this.state.meta.liability_total }
                            net_worth={ this.state.meta.net_worth } />
                 </div>
             </div>

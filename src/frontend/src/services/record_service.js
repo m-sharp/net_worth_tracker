@@ -15,6 +15,14 @@ function handleResponse(response) {
 };
 
 
+export const delete_record = (id) => {
+    let endpoint = "api/record/" + id + "/";
+    return fetch(endpoint, {
+        method: "DELETE"
+    });
+};
+
+
 export const get_all_records = () => {
     return fetch("api/record/get_all/").then(response => {
         return handleResponse(response);
