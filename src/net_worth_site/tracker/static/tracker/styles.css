@@ -1,0 +1,110 @@
+/* Main body and layout */
+body {
+    background-image: url("background.png");
+}
+
+h1 {
+    text-align: center;
+}
+
+#app {
+    width: 90%;
+    background: #f1e9e0;
+    margin: 0 auto 40px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+}
+
+.main {
+    width: 93%;
+    padding: 5px;
+    margin: auto;
+}
+
+/* Balance Sheet table stabling */
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    line-height: 24px;
+    margin: auto;
+    width: 94%;
+    font-size: 18px;
+}
+
+th {
+    background-color: #4CAF50;
+    color: #FFFFFF;
+    text-align: left;
+}
+
+tr {
+    line-height: 30px;
+}
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+th, td {
+    padding: 11px 8px;
+}
+
+th, tr, td {
+    border: 2px solid #DDF;
+}
+
+.delete-column {
+    width: 10%;
+    text-align: center;
+}
+
+/* Currency Formatting */
+.asset {
+    color: #06d851;
+}
+
+    .asset::before {
+        content: "$";
+    }
+
+.liability {
+    color: #ff0000;
+}
+
+    .liability:before {
+        content: "- ($"
+    }
+
+    .liability::after {
+        content: ")";
+    }
+
+/* Form and Stats Formatting */
+.horizontal-layout {
+    font-size: 18px;
+    margin: 25px auto;
+    text-align: center;
+}
+
+    .horizontal-layout label {
+        width: 20%;
+        display: inline-block;
+    }
+
+    .horizontal-layout p {
+        width: 25%;
+        display: inline-block;
+    }
+
+.balance-input {
+    width: 50%;
+}
+
+.stats {
+    margin-top: 6px;
+}
+
+/* Disclaimer */
+.disclaimer {
+    font-size: 9px;
+}

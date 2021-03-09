@@ -80,16 +80,16 @@ class App extends Component {
             return <div />
         }
         return (
-            <div>
-                <div>
-                    <BalanceSheet records={ this.state.records }
-                                  delete_handler={ this.delete_record } />
-                    <InputForm record_types={ this.state.record_types }
-                               create_handler={ this.add_record } />
-                    <Stats asset_total={ this.state.meta.asset_total }
-                           liability_total={ this.state.meta.liability_total }
-                           net_worth={ this.state.meta.net_worth } />
-                </div>
+            <div className="main">
+                <h2>Balance Sheet</h2>
+                <BalanceSheet records={ this.state.records }
+                              delete_handler={ this.delete_record }
+                              record_types={ this.state.record_types } />
+                <Stats asset_total={ this.state.meta.asset_total }
+                       liability_total={ this.state.meta.liability_total }
+                       net_worth={ this.state.meta.net_worth } />
+                <InputForm record_types={ this.state.record_types }
+                           create_handler={ this.add_record } />
             </div>
         );
     };

@@ -1,6 +1,3 @@
-import React from "react";
-
-
 // TODO: This doesn't work for all cases but will do for now...
 function handleResponse(response) {
     if (response.status >= 400) {
@@ -28,6 +25,7 @@ export const get_all_records = () => {
         return handleResponse(response);
     });
 };
+
 
 export const get_calculations = () => {
     return fetch("api/record/get_meta/").then(response => {

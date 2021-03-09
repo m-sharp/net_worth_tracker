@@ -6,19 +6,27 @@ import Record from "./record";
 class BalanceSheet extends Component {
     render () {
         return (
-            <div>
-                <h4>Balance Sheet</h4>
-                <ul>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Balance</th>
+                        <th className="delete-column">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
                     { this.props.records.map(record => {
                         return (
-                            <Record record={ record }
-                                    key={ record.id }
-                                    id={ record.id }
-                                    delete_handler={ this.props.delete_handler } />
+                            <tr key={ record.id }>
+                                <Record record={ record }
+                                        id={ record.id }
+                                        delete_handler={ this.props.delete_handler }
+                                        record_types={ this.props.record_types } />
+                            </tr>
                         );
                     })}
-                </ul>
-            </div>
+                </tbody>
+            </table>
         );
     };
 };

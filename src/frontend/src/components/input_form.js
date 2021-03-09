@@ -42,37 +42,40 @@ class InputForm extends Component {
     render() {
         return (
             <form onSubmit={ this.handleSubmit }>
-                <label>
-                    Record Type:
-                    <select name="type_id" value={ this.state.type_id } onChange={ this.handleChange } required>
-                        <option key={ this.default_type_id } value=''></option>
-                        <option key={ this.props.record_types.asset.id }
-                                value={ this.props.record_types.asset.id }>
-                            { this.props.record_types.asset.name }
-                        </option>
-                        <option key={ this.props.record_types.liability.id }
-                                value={ this.props.record_types.liability.id }>
-                            { this.props.record_types.liability.name }
-                        </option>
-                    </select>
-                </label>
-                <label>
-                    Name:
-                    <input name="name"
-                           type="text"
-                           value={ this.state.name }
-                           onChange={ this.handleChange }
-                           required />
-                </label>
-                <label>
-                    Balance:
-                    <input name="balance"
-                           type="number"
-                           value={ this.state.balance }
-                           onChange={ this.handleChange }
-                           required />
-                </label>
-                <input type="submit" value="Submit" />
+                <div className="horizontal-layout">
+                    <label>
+                        <strong>Record Type:&nbsp;</strong>
+                        <select name="type_id" value={ this.state.type_id } onChange={ this.handleChange } required>
+                            <option key={ this.default_type_id } value=''></option>
+                            <option key={ this.props.record_types.asset.id }
+                                    value={ this.props.record_types.asset.id }>
+                                { this.props.record_types.asset.name }
+                            </option>
+                            <option key={ this.props.record_types.liability.id }
+                                    value={ this.props.record_types.liability.id }>
+                                { this.props.record_types.liability.name }
+                            </option>
+                        </select>
+                    </label>
+                    <label>
+                        <strong>Name:&nbsp;</strong>
+                        <input name="name"
+                               type="text"
+                               value={ this.state.name }
+                               onChange={ this.handleChange }
+                               required />
+                    </label>
+                    <label>
+                        <strong>Balance:&nbsp;</strong>
+                        <input name="balance"
+                               type="number"
+                               className="balance-input"
+                               value={ this.state.balance }
+                               onChange={ this.handleChange }
+                               required />
+                    </label>
+                    <input type="submit" value="Add Record" />
+                </div>
             </form>
         );
     };
