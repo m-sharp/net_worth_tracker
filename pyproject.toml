@@ -1,14 +1,33 @@
 [tool.poetry]
 name = "net_worth_tracker"
 version = "0.1.0"
-description = ""
+description = "Learning Django by creating a simple Asset / Liability Manager"
 authors = ["Mike Harp <msharp185@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+Django = "^3.1.7"
+PyMySQL = "^1.0.2"
+cryptography = "^3.4.6"
+djangorestframework = "^3.12.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
+ipython = "^7.20"
+pudb = "^2020.1"
+
+[tool.black]
+line-length = 120
+target-version = ["py38"]
+include = "/(src|tests)/.*"
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 120
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
