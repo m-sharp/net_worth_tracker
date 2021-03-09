@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
@@ -33,20 +34,35 @@ class RecordViewSet(ModelViewSet):
             :class:`django.http.HttpResponse`: HttpResponse object containing the list of data records and meta data
                 calculations.
         """
-        query_set = self.get_queryset()
-        asset_total = get_total_balance(query_set.filter(record_type=asset_record_type))
-        liability_total = get_total_balance(query_set.filter(record_type=liability_record_type))
-        net_worth = round(asset_total - liability_total, 2)
         list_response = self.list(request)
         list_response.data = dict(
-            meta=dict(
-                asset_total=asset_total,
-                liability_total=liability_total,
-                net_worth=net_worth,
-            ),
+            meta=self._get_calculations(self.get_queryset()),
             data=list_response.data,
         )
         return list_response
+
+    @action(detail=False, methods=["GET"])
+    def get_meta(self, request):
+        """
+        Custom endpoint that returns the meta calculations based on current Records.
+
+        Args:
+            request (:class:`django.http.HttpRequest`): HttpRequest object containing information about the request
+        Returns:
+            :class:`django.http.HttpResponse`: HttpResponse object containing the meta data calculations.
+        """
+        return JsonResponse(self._get_calculations(self.get_queryset()))
+
+    @classmethod
+    def _get_calculations(cls, query_set):
+        asset_total = get_total_balance(query_set.filter(record_type=asset_record_type))
+        liability_total = get_total_balance(query_set.filter(record_type=liability_record_type))
+        net_worth = round(asset_total - liability_total, 2)
+        return dict(
+            asset_total=asset_total,
+            liability_total=liability_total,
+            net_worth=net_worth,
+        )
 
 
 class RecordTypeViewSet(ReadOnlyModelViewSet):

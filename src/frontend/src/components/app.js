@@ -4,16 +4,7 @@ import { render } from "react-dom";
 import BalanceSheet from "./balance_sheet";
 import InputForm from "./input_form";
 import Stats from "./stats";
-
-
-function handleResponse(response) {
-    if (response.status >= 400) {
-        return this.setState(() => {
-            return { status: "Something went wrong!" };
-        });
-    }
-    return response.json();
-};
+import { get_all_records, get_calculations, get_record_types } from "../services/record_service";
 
 
 class App extends Component {
@@ -31,46 +22,45 @@ class App extends Component {
     };
 
     componentDidMount() {
-        fetch("api/record_type/")
-            .then(response => {
-                return handleResponse(response);
-            })
-            .then(data => {
-                let asset = data.filter(function(record_type) { return record_type.name === "Asset" });
-                let liability = data.filter(function(record_type) { return record_type.name === "Liability" });
-                this.setState(() => {
-                    return {
-                        record_types: {
-                            asset: asset[0],
-                            liability: liability[0]
-                        },
-                        loaded_record_types: true
-                    }
-                });
+        get_record_types().then(data => {
+            let asset = data.filter(function(record_type) { return record_type.name === "Asset" });
+            let liability = data.filter(function(record_type) { return record_type.name === "Liability" });
+            this.setState(() => {
+                return {
+                    record_types: {
+                        asset: asset[0],
+                        liability: liability[0]
+                    },
+                    loaded_record_types: true
+                }
             });
-        fetch("api/record/get_all/")
-            .then(response => {
-                return handleResponse(response);
-            })
-            .then(data => {
-                this.setState(() => {
-                    return {
-                        records: data.data,
-                        meta: data.meta,
-                        loaded_records: true
-                    }
-                });
+        });
+        get_all_records().then(data => {
+            this.setState(() => {
+                return {
+                    records: data.data,
+                    meta: data.meta,
+                    loaded_records: true
+                }
             });
+        });
     };
 
-    // ToDo: Need to update meta calculations as well
-    add_record(record)
+
+    add_record(record) {
         let records_ = this.state.records;
         records_.push(record);
         this.setState(() => {
             return {
                 records: records_
             }
+        });
+        get_calculations().then(data => {
+            this.setState(() => {
+                return {
+                    meta: data
+                }
+            });
         });
     };
 

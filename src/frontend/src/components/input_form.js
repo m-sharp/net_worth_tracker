@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import { post_record } from "../services/record_service";
 
 const default_id = 0
 
@@ -27,23 +28,7 @@ class InputForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        fetch("api/record/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                name: this.state.name,
-                balance: this.state.balance,
-                record_type: this.state.type_id
-            })
-        }).then(response => {
-            if (response.status === 201) {
-                return response.json();
-            }
-        })
-        .then(data => {
+        post_record(this.state.name, this.state.balance, this.state.type_id).then(data => {
             this.props.create_handler(data);
             this.setState(() => {
                 return {
