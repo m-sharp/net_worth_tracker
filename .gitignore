@@ -132,3 +132,4 @@ dmypy.json
 
 # js
 node_modules/
+/src/net_worth_site/staticfiles/
