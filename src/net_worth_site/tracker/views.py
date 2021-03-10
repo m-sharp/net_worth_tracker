@@ -4,8 +4,20 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
-from .models import Record, RecordType, asset_record_type, get_total_balance, liability_record_type
+from .models import Record, RecordType
 from .serializers import RecordSerializer, RecordTypeSerializer
+
+
+def get_asset_record_type():
+    return RecordType.objects.filter(name="Asset").first()
+
+
+def get_liability_record_type():
+    return RecordType.objects.filter(name="Liability").first()
+
+
+def get_total_balance(records):
+    return sum([record.balance for record in records])
 
 
 class RecordViewSet(ModelViewSet):
@@ -55,8 +67,8 @@ class RecordViewSet(ModelViewSet):
 
     @classmethod
     def _get_calculations(cls, query_set):
-        asset_total = get_total_balance(query_set.filter(record_type=asset_record_type))
-        liability_total = get_total_balance(query_set.filter(record_type=liability_record_type))
+        asset_total = get_total_balance(query_set.filter(record_type=get_asset_record_type()))
+        liability_total = get_total_balance(query_set.filter(record_type=get_liability_record_type()))
         net_worth = round(asset_total - liability_total, 2)
         return dict(
             asset_total=asset_total,

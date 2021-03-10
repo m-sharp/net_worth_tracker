@@ -13,10 +13,6 @@ class RecordType(Model):
             yield "id", self.id
 
 
-asset_record_type = RecordType.objects.filter(name="Asset").first()
-liability_record_type = RecordType.objects.filter(name="Liability").first()
-
-
 class Record(Model):
     record_type = ForeignKey(RecordType, on_delete=PROTECT)
     name = CharField(max_length=100)
@@ -31,7 +27,3 @@ class Record(Model):
         yield "balance", self.balance
         if self.id:
             yield "id", self.id
-
-
-def get_total_balance(records):
-    return sum([record.balance for record in records])
